@@ -7,8 +7,9 @@ import NotFound from 'views/errorPage/NotFound';
 export default function RoutePage() {
   return (
     <Routes>
-      <Route path="/home" element={<HomePage />} />
-      <Route path="/" element={<Navigate replace to="/home" />} />
+      <Route path="/repos1" element={<HomePage />} />
+      <Route path="/repos2" element={<HomePage />} />
+      <Route path="/" element={<Navigate replace to="/repos1" />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

@@ -143,7 +143,7 @@ export default function BasicModal({ open, toggle }: { open: any; toggle: any })
               label="Open Issues"
             />
           </FormControl>
-          <FormControl fullWidth>
+          <FormControl fullWidth sx={{ m: 1 }}>
             <InputLabel id="private">Private</InputLabel>
             <Select
               labelId="private"

@@ -10,13 +10,16 @@ import AddIcon from '@mui/icons-material/Add';
 import Typography from '@mui/material/Typography';
 import EditModal from 'components/EditModal';
 import DeleteModal from 'components/DeleteModal';
+import Header from 'components/Header';
 
 export default function DataTable() {
   const dispatch = useDispatch();
   const rows = useSelector((state: RootStateOrAny) => state.data);
 
   useEffect(() => {
-    dispatch(fetchRepoData());
+    if (!rows.length) {
+      dispatch(fetchRepoData());
+    }
   }, []);
 
   const [showModal, updateShowModal] = useState(false);
@@ -99,63 +102,66 @@ export default function DataTable() {
     },
   ];
   return (
-    <Container maxWidth="lg">
-      <EditModal open={showModal} toggle={toggleModal} />
-      <DeleteModal open={showDelModal} toggle={toggleDelModal} handleDelete={handleDelete} />
-      <Box
-        sx={{
-          marginTop: 4,
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'center ',
-        }}
-      >
-        <Typography variant="h3" component="div" gutterBottom>
-          Management
-        </Typography>
-      </Box>
-      <Box
-        sx={{
-          marginTop: 5,
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'flex-end',
-        }}
-      >
-        <Button
-          variant="contained"
-          endIcon={<AddIcon />}
-          onClick={() => {
-            dispatch(
-              updateForm({
-                id: '',
-                name: '',
-                description: '',
-                watchers: 0,
-                language: '',
-                openIssues: 0,
-                private: '',
-                mode: 'add',
-              })
-            );
-            toggleModal();
+    <>
+      <Header />
+      <Container maxWidth="lg">
+        <EditModal open={showModal} toggle={toggleModal} />
+        <DeleteModal open={showDelModal} toggle={toggleDelModal} handleDelete={handleDelete} />
+        <Box
+          sx={{
+            marginTop: 4,
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center ',
           }}
         >
-          Add
-        </Button>
-      </Box>
-      <Box
-        sx={{
-          marginTop: 2,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <div style={{ height: 400, width: '100%' }}>
-          <DataGrid rows={rows} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />
-        </div>
-      </Box>
-    </Container>
+          <Typography variant="h3" component="div" gutterBottom>
+            Management
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            marginTop: 5,
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+          }}
+        >
+          <Button
+            variant="contained"
+            endIcon={<AddIcon />}
+            onClick={() => {
+              dispatch(
+                updateForm({
+                  id: '',
+                  name: '',
+                  description: '',
+                  watchers: 0,
+                  language: '',
+                  openIssues: 0,
+                  private: '',
+                  mode: 'add',
+                })
+              );
+              toggleModal();
+            }}
+          >
+            Add
+          </Button>
+        </Box>
+        <Box
+          sx={{
+            marginTop: 2,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <div style={{ height: 400, width: '100%' }}>
+            <DataGrid rows={rows} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />
+          </div>
+        </Box>
+      </Container>
+    </>
   );
 }
