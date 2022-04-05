@@ -9,20 +9,17 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 500,
   bgcolor: 'background.paper',
-  // border: '2px solid #000',
   boxShadow: 24,
   p: 4,
 };
 
-export default function DeleteModal({
-  open,
-  toggle,
-  handleDelete,
-}: {
-  open: any;
-  toggle: any;
-  handleDelete: any;
-}) {
+export interface Props {
+  open: boolean;
+  toggle: () => void;
+  handleDelete: () => void;
+}
+
+export default function DeleteModal({ open, toggle, handleDelete }: Props) {
   return (
     <div>
       <Modal
@@ -44,6 +41,7 @@ export default function DeleteModal({
             }}
           >
             <Button
+              color="error"
               variant="contained"
               onClick={handleDelete}
               sx={{
@@ -53,7 +51,7 @@ export default function DeleteModal({
               Delete
             </Button>
             <Button variant="outlined" onClick={toggle}>
-              Cancle
+              Cancel
             </Button>
           </Box>
         </Box>
