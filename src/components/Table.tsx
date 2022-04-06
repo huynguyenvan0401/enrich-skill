@@ -5,7 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 export interface Props {
-  rows: [];
+  rows: any;
   onEditClick: (params: any) => void;
   onDeleteClick: (params: any) => void;
 }
